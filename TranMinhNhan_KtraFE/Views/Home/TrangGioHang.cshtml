@@ -1,0 +1,355 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TenSV_KtraFE - Shopping Cart</title>
+    <!-- Nhúng Font Awesome 5.15.4 chuẩn theo yêu cầu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #eaeded;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #131921;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff9900;
+            letter-spacing: -1px;
+        }
+
+        .search-box {
+            display: flex;
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+            .search-box input {
+                width: 100%;
+                padding: 10px;
+                border: none;
+                border-radius: 4px 0 0 4px;
+                outline: none;
+            }
+
+            .search-box button {
+                background-color: #febd69;
+                border: none;
+                padding: 0 15px;
+                border-radius: 0 4px 4px 0;
+                cursor: pointer;
+                color: #111;
+                font-size: 16px;
+            }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+            .cart-icon a {
+                color: white;
+                text-decoration: none;
+            }
+
+            .cart-icon i {
+                font-size: 24px;
+            }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f08804;
+            color: #111;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 1px 5px;
+            border-radius: 50%;
+        }
+
+        /* CONTAINER GIỎ HÀNG */
+        .cart-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .cart-left {
+            flex: 3;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cart-right {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            height: fit-content;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cart-title {
+            font-size: 28px;
+            font-weight: 400;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            align-items: center;
+        }
+
+            .cart-item img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007185;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #B12704;
+        }
+
+        .cart-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .qty-input {
+            width: 60px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #a6a6a6;
+            text-align: center;
+        }
+
+        .subtotal-box {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+            .subtotal-box span {
+                font-weight: bold;
+                color: #B12704;
+            }
+
+        .checkout-btn {
+            width: 100%;
+            background: #ffd814;
+            border: 1px solid #fcd200;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+            .checkout-btn:hover {
+                background: #f7ca00;
+            }
+
+        /* FOOTER */
+        footer {
+            background-color: #232f3e;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-left">
+            <div class="logo">amazon</div>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search Amazon">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="header-right">
+            <span>Hello, Sign in</span>
+            <div class="cart-icon">
+                <a href="@Url.Action("TrangGioHang", "Home")">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="header-cart-count">3</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NỘI DUNG GIỎ HÀNG -->
+    <div class="cart-container">
+        <!-- Danh sách bên trái -->
+        <div class="cart-left">
+            <div class="cart-title">Shopping Cart</div>
+
+            <!-- Sản phẩm 1 (data-price: giá gốc của 1 sản phẩm tính bằng VNĐ) -->
+            <div class="cart-item" data-price="850000">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=200&q=80" alt="item">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Tommy Hilfiger Women's Leather Saddle Crossbody Bag</div>
+                    <div style="color: #007600; font-size: 12px; margin-bottom: 5px;">In Stock</div>
+                    <div class="cart-actions">
+                        <label>Qty:</label>
+                        <input type="number" class="qty-input" value="1" min="1" oninput="updateCart()" />
+                        <span style="color: #007185; cursor: pointer; font-size: 13px; margin-left: 15px;">Delete</span>
+                    </div>
+                </div>
+                <div class="cart-item-price"><span class="item-total">850,000</span> đ</div>
+            </div>
+
+            <!-- Sản phẩm 2 -->
+            <div class="cart-item" data-price="1200000">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=200&q=80" alt="item">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Sam Edelman Women's Pumps, Classic Blue</div>
+                    <div style="color: #007600; font-size: 12px; margin-bottom: 5px;">In Stock</div>
+                    <div class="cart-actions">
+                        <label>Qty:</label>
+                        <input type="number" class="qty-input" value="1" min="1" oninput="updateCart()" />
+                        <span style="color: #007185; cursor: pointer; font-size: 13px; margin-left: 15px;">Delete</span>
+                    </div>
+                </div>
+                <div class="cart-item-price"><span class="item-total">1,200,000</span> đ</div>
+            </div>
+
+            <!-- Sản phẩm 3 -->
+            <div class="cart-item" data-price="450000">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=200&q=80" alt="item">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">Supersonic SC-1071 BT Kids Toys for Rooms</div>
+                    <div style="color: #007600; font-size: 12px; margin-bottom: 5px;">In Stock</div>
+                    <div class="cart-actions">
+                        <label>Qty:</label>
+                        <input type="number" class="qty-input" value="1" min="1" oninput="updateCart()" />
+                        <span style="color: #007185; cursor: pointer; font-size: 13px; margin-left: 15px;">Delete</span>
+                    </div>
+                </div>
+                <div class="cart-item-price"><span class="item-total">450,000</span> đ</div>
+            </div>
+
+            <div style="text-align: right; margin-top: 15px; font-size: 16px;">
+                Subtotal (<span id="total-qty">3</span> items): <strong style="font-size: 18px;" id="cart-subtotal">2,500,000 đ</strong>
+            </div>
+        </div>
+
+        <!-- Hộp tổng tiền bên phải -->
+        <div class="cart-right">
+            <div class="subtotal-box">
+                Subtotal (<span id="total-qty-right">3</span> items): <span><span id="cart-subtotal-right">2,500,000</span> đ</span>
+            </div>
+            <button class="checkout-btn">Proceed to checkout</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT TÍNH TOÁN TỰ ĐỘNG SỐ LƯỢNG VÀ TỔNG TIỀN VNĐ -->
+    <script>
+        function formatMoney(amount) {
+            return amount.toLocaleString('vi-VN');
+        }
+
+        function updateCart() {
+            const items = document.querySelectorAll('.cart-item');
+            let totalQty = 0;
+            let subtotal = 0;
+
+            items.forEach(item => {
+                const pricePerUnit = parseFloat(item.getAttribute('data-price'));
+                let qtyInput = item.querySelector('.qty-input');
+
+                let qty = parseInt(qtyInput.value);
+                if (isNaN(qty) || qty < 1) {
+                    qty = 1;
+                }
+
+                // Tính tổng tiền cho từng dòng sản phẩm
+                const itemTotal = pricePerUnit * qty;
+                item.querySelector('.item-total').innerText = formatMoney(itemTotal);
+
+                totalQty += qty;
+                subtotal += itemTotal;
+            });
+
+            // Cập nhật tổng số lượng lên các vị trí trên giao diện
+            document.getElementById('total-qty').innerText = totalQty;
+            document.getElementById('total-qty-right').innerText = totalQty;
+            document.getElementById('header-cart-count').innerText = totalQty;
+
+            // Cập nhật tổng tiền VNĐ vào cả 2 vị trí
+            document.getElementById('cart-subtotal').innerText = formatMoney(subtotal) + ' đ';
+            document.getElementById('cart-subtotal-right').innerText = formatMoney(subtotal);
+        }
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026, Amazon.com, Inc. or its affiliates. (Project: TenSV_KtraFE)</p>
+    </footer>
+
+</body>
+</html>
